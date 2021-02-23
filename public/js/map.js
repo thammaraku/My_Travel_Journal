@@ -67,10 +67,10 @@ function initMap() {
 
 // POST Request to Location Table
 function postLocation(geoLocationObj) {
-  console.log("postLocations = " + geoLocationObj);
-  console.log("postLocations.place = " + geoLocationObj.place);
-  console.log("postLocations.lat = " + geoLocationObj.lat);
-  console.log("postLocations.lang = " + geoLocationObj.lang);
+  // console.log("postLocations = " + geoLocationObj);
+  // console.log("postLocations.place = " + geoLocationObj.place);
+  // console.log("postLocations.lat = " + geoLocationObj.lat);
+  // console.log("postLocations.lang = " + geoLocationObj.lang);
 
   const place = geoLocationObj.place;
   const latitude = geoLocationObj.lat;
@@ -129,19 +129,19 @@ function getGeolocation(placeName) {
 
 
 function collectUserSearch(geoLocationObj) {
-  console.log("collectUserSearc geoLocationObj = " + geoLocationObj);
+  // console.log("collectUserSearc geoLocationObj = " + geoLocationObj);
   userListArr.push(geoLocationObj);
 
   // Render new userListArr
   // renderJournal(userListArr);
   initMap(userListArr);
-  console.log("under collectUserSearch before postLocation geoLocationObj = " + geoLocationObj);
+  // console.log("under collectUserSearch before postLocation geoLocationObj = " + geoLocationObj);
   postLocation(geoLocationObj);
 
 }
 
 function renderJournal() {
-  console.log("userListArr.length under renderJournal = " + userListArr.length);
+  // console.log("userListArr.length under renderJournal = " + userListArr.length);
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
       $(`#row${i}`).html(`<td><p class="">${userListArr[i].place} ${userListArr[i].date}
@@ -165,7 +165,7 @@ function landingMap() {
   const userListArr = [];
   // const newAdd = {};
   const geoLocationObj = {};
-  console.log("newAddArr.length under landingMap = " + newAddArr.length);
+  // console.log("newAddArr.length under landingMap = " + newAddArr.length);
 
 
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -181,7 +181,7 @@ function handleSearchBtnSubmit(event) {
   event.preventDefault;
 
 
-  console.log("under handleSearchBtnSubmit memberEmail = " + memberEmail);
+  // console.log("under handleSearchBtnSubmit memberEmail = " + memberEmail);
   // console.log("newAddArr.length under Search Button = " + newAddArr.length);
 
   var newAdd = {
@@ -210,10 +210,10 @@ function renderJournal2(newAddArr) {
   console.log("newAddArr.length under renderJournal2 = " + newAddArr.length);
 
   for (var i = 0; i < newAddArr.length; ++i) {
-    console.log("newAddArr[i].placeName = " + newAddArr[i].placeName);
-    console.log("newAddArr[i].date = " + newAddArr[i].date);
-    console.log("newAddArr[i].journal = " + newAddArr[i].journal);
-    console.log("newAddArr[i].tripName = " + newAddArr[i].tripName);
+    // console.log("newAddArr[i].placeName = " + newAddArr[i].placeName);
+    // console.log("newAddArr[i].date = " + newAddArr[i].date);
+    // console.log("newAddArr[i].journal = " + newAddArr[i].journal);
+    // console.log("newAddArr[i].tripName = " + newAddArr[i].tripName);
 
     $(`#row${i}`).html(`<td class="journal_table"><p>${newAddArr[i].placeName} - ${newAddArr[i].date}
   <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
@@ -267,6 +267,17 @@ function handlePushBtnSubmit(event) {
 }
 
 
+function handleDeletePlace(event) {
+  event.stopPropagation();
+
+  console.log("under handleDelete = " + event)
+  const note = $(this).parent().data();
+  // console.log("under handleDelete note.id = " + note.id)
+
+
+
+}
+
 //////////////////////////// EXECUTION ////////////////////////////////////////
 
 $(document).ready(function () {
@@ -293,10 +304,14 @@ $(document).ready(function () {
   // When user click to search a place
   $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
 
-  console.log("after serachButton newAddArr.length = " + newAddArr.length);
+  // console.log("after serachButton newAddArr.length = " + newAddArr.length);
 
   // When user click to finish a journal
   $(document).on("click", "#pushBtn", handlePushBtnSubmit);
+
+
+  // When user click to delete a place
+  $(document).on("click", ".fas", handleDeletePlace);
 
 
 });

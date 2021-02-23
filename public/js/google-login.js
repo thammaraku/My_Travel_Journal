@@ -50,10 +50,10 @@ function onSignIn(googleUser) { // eslint-disable-line no-unused-vars
   $("#loggedUserImage").attr("src", profile.getImageUrl());
   $("#loggedUsername").html(profile.getName());
   $("#loggedUserEmail").html(profile.getEmail());
-  console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log("Name: " + profile.getName());
-  console.log("Image URL: " + profile.getImageUrl());
-  console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+  // console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  // console.log("Name: " + profile.getName());
+  // console.log("Image URL: " + profile.getImageUrl());
+  // console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
 
   let googleEmail = profile.getEmail();
   let googleName = profile.getName();
@@ -62,7 +62,7 @@ function onSignIn(googleUser) { // eslint-disable-line no-unused-vars
 }
 
 function postFromGoogle(googleEmail, googleName, googleImageURL) {
-  console.log(googleEmail);
+  // console.log(googleEmail);
 
   $.post("/api/google/login", {
     email: googleEmail,
@@ -81,7 +81,7 @@ function postFromGoogle(googleEmail, googleName, googleImageURL) {
 function signOut() { // eslint-disable-line no-unused-vars
   const auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(() => {
-    console.log("User signed out.");
+    // console.log("User signed out.");
     $("#signout-container").hide();
     $("#signin-container").show();
   });

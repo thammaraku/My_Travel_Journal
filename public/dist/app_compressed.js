@@ -1,0 +1,1 @@
+function initMap(){const a={lat:0,lng:0},b=new google.maps.Map(document.getElementById("map"),{zoom:2.5,center:a}),c=new google.maps.Marker({position:a,map:b})}

@@ -7,9 +7,12 @@ var session = require("express-session");
 var passport = require("./config/passport");
 // const cookieSession = require('cookie-session')
 
+var compression = require('compression');
+
 // Setting up port and requiring models for syncing
 var PORT = process.env.PORT || 8080;
 var db = require("./models");
+
 
 // Creating express app and configuring middleware needed for authentication
 var app = express();
@@ -21,6 +24,10 @@ app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
+// add compression
+app.use(compression());
+
+
 // Requiring our routes
 // require("./routes/old-routes.js")(app);
 require('./routes/html-routes.js')(app);
@@ -30,6 +37,6 @@ require("./routes/api-routes.js")(app);
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync({force:false}).then(function() {
   app.listen(PORT, function() {
-    console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+    console.log(`==> 🌎  Listening on port ${PORT}. Visit http://localhost:${PORT} in your browser.`)
   });
 });

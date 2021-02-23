@@ -31,7 +31,7 @@ $(document).ready(function () {
       // Gets post data for a post if we're editing
       function getJournalData(UserId) {
         $.get("/api/userJournalPage/" + UserId, function (data) {
-          console.log(data);
+          // console.log(data);
           if (data) {
 
             data.forEach(function (entry) {
@@ -75,7 +75,7 @@ $(document).ready(function () {
 
 
       $.get("/api/user_data", function (data) {
-        console.log(data);
+        // console.log(data);
         // make sure you are grabbing the correct id from the console log above
         UserId = data.UserId;
         // now run the call with the userId
